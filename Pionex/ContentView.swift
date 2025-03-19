@@ -1,59 +1,81 @@
-//
-//  ContentView.swift
-//  Pionex
-//
-//  Created by Sylvain Otparlic on 18/03/2025.
-//
-
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @StateObject private var selectionManager = CryptoSelectionManager()
+    @StateObject private var viewModel: CryptoViewModel
+    @State private var showSelectionView = false
+    
+    init() {
+        let selectionManager = CryptoSelectionManager()
+        _viewModel = StateObject(wrappedValue: CryptoViewModel(selectionManager: selectionManager))
+        _selectionManager = StateObject(wrappedValue: selectionManager)
+    }
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        NavigationView {
+            VStack {
+                Text("Pionex Trading Bot")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding()
+                
+                Button(action: {
+                    showSelectionView = true
+                }) {
+                    Text("🔍 Sélectionner des cryptos")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
-                .onDelete(perform: deleteItems)
+                
+                if !viewModel.selectedCryptos.isEmpty {
+                    Text("📊 Cryptos sélectionnées")
+                        .font(.headline)
+                        .padding()
+                    
+                    List(viewModel.selectedCryptos) { crypto in
+                        CryptoRow(crypto: crypto)
+                    }
+                } else {
+                    Text("Aucune crypto sélectionnée. Cliquez sur le bouton pour en ajouter.")
+                        .foregroundColor(.gray)
+                        .padding()
+                }
             }
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
+            .onAppear {
+                viewModel.loadSelectedCryptos()
+            }
             .toolbar {
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                ToolbarItem(placement: .principal) {
+                    Text("Marché Crypto").font(.headline)
                 }
             }
-        } detail: {
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+            .sheet(isPresented: $showSelectionView, onDismiss: {
+                viewModel.loadSelectedCryptos()
+            }) {
+                CryptoSelectionView(selectionManager: selectionManager)
             }
         }
     }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+struct CryptoRow: View {
+    let crypto: CryptoModel
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(crypto.name)
+                    .font(.headline)
+                Text(crypto.symbol.uppercased())
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+            }
+            Spacer()
+            Text(String(format: "$%.2f", crypto.price))
+                .bold()
+        }
+        .padding()
+    }
 }
