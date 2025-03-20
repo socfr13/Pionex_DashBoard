@@ -27,8 +27,19 @@ class BitcoinPriceViewModel: ObservableObject {
                 switch completion {
                 case .failure(let error):
                     self.errorMessage = "Erreur de récupération du prix: \(error.localizedDescription)"
-                    if case .decodingError = error as? DecodingError {
-                        self.errorMessage = "Erreur de décodage JSON. Vérifiez la structure de la réponse de l'API."
+                    if let decodingError = error as? DecodingError { // Conversion de type conditionnelle (as?)
+                        switch decodingError { // Switch pour gérer les différents cas de DecodingError (optionnel)
+                        case .dataCorrupted(let context):
+                            self.errorMessage = "Erreur de données corrompues: \(context.debugDescription)"
+                        case .keyNotFound(let key, let context):
+                            self.errorMessage = "Clé JSON non trouvée: \(key.stringValue), \(context.debugDescription)"
+                        case .typeMismatch(let type, let context):
+                            self.errorMessage = "Type JSON incorrect: \(type), \(context.debugDescription)"
+                        case .valueNotFound(let type, let context):
+                            self.errorMessage = "Valeur JSON non trouvée: \(type), \(context.debugDescription)"
+                        default:
+                            self.errorMessage = "Erreur de décodage JSON inconnue."
+                        }
                     } else if (error as NSError).domain == NSURLErrorDomain && (error as NSError).code == NSURLErrorNotConnectedToInternet {
                         self.errorMessage = "Pas de connexion Internet. Veuillez vérifier votre connexion réseau."
                     }
@@ -36,6 +47,9 @@ class BitcoinPriceViewModel: ObservableObject {
                     break
                 }
             }, receiveValue: { btcPrice in
+                self.price = btcPrice.btc.eur
+                self.errorMessage = nil // Effacer les erreurs précédentes en cas de succès
+            }), receiveValue: { btcPrice in
                 self.price = btcPrice.btc.eur
                 self.errorMessage = nil // Effacer les erreurs précédentes en cas de succès
             })

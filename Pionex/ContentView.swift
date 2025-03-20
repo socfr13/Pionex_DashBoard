@@ -4,6 +4,11 @@
 //
 //  Created by Sylvain on 20/03/2025.
 //
+/* Mise à jour de GitHub
+git add .
+git commit -m "Correction des erreurs Xcode : problème Preview Content et gestion DecodingError"
+git push origin main
+*/
 
 import SwiftUI
 
