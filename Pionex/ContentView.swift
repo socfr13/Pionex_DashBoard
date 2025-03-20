@@ -1,81 +1,48 @@
+//
+//  ContentView.swift
+//  CryptoShow
+//
+//  Created by Sylvain on 20/03/2025.
+//
+
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var selectionManager = CryptoSelectionManager()
-    @StateObject private var viewModel: CryptoViewModel
-    @State private var showSelectionView = false
-    
-    init() {
-        let selectionManager = CryptoSelectionManager()
-        _viewModel = StateObject(wrappedValue: CryptoViewModel(selectionManager: selectionManager))
-        _selectionManager = StateObject(wrappedValue: selectionManager)
-    }
-    
+    @StateObject var viewModel = BitcoinPriceViewModel()
+
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("Pionex Trading Bot")
+        VStack {
+            Text("Cours du Bitcoin (BTC)")
+                .font(.title)
+                .padding()
+
+            if let price = viewModel.price {
+                Text("\(price, specifier: "%.2f") €")
                     .font(.largeTitle)
-                    .bold()
+                    .fontWeight(.bold)
                     .padding()
-                
-                Button(action: {
-                    showSelectionView = true
-                }) {
-                    Text("🔍 Sélectionner des cryptos")
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                
-                if !viewModel.selectedCryptos.isEmpty {
-                    Text("📊 Cryptos sélectionnées")
-                        .font(.headline)
-                        .padding()
-                    
-                    List(viewModel.selectedCryptos) { crypto in
-                        CryptoRow(crypto: crypto)
-                    }
-                } else {
-                    Text("Aucune crypto sélectionnée. Cliquez sur le bouton pour en ajouter.")
-                        .foregroundColor(.gray)
-                        .padding()
-                }
+            } else if let errorMessage = viewModel.errorMessage {
+                Text("Erreur: \(errorMessage)")
+                    .foregroundColor(.red)
+                    .padding()
+            } else {
+                Text("Chargement du prix...")
+                    .padding()
             }
-            .onAppear {
-                viewModel.loadSelectedCryptos()
+
+            Button("Actualiser le prix") {
+                viewModel.fetchBTCPrice()
             }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Marché Crypto").font(.headline)
-                }
-            }
-            .sheet(isPresented: $showSelectionView, onDismiss: {
-                viewModel.loadSelectedCryptos()
-            }) {
-                CryptoSelectionView(selectionManager: selectionManager)
-            }
+            .padding()
+        }
+        .onAppear {
+            viewModel.fetchBTCPrice()
         }
     }
 }
 
-struct CryptoRow: View {
-    let crypto: CryptoModel
-    
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(crypto.name)
-                    .font(.headline)
-                Text(crypto.symbol.uppercased())
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-            }
-            Spacer()
-            Text(String(format: "$%.2f", crypto.price))
-                .bold()
-        }
-        .padding()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
