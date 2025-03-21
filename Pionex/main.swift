@@ -1,14 +1,7 @@
-//
-//  PionexApp.swift
-//  Pionex
-//
-//  Created by Sylvain Otparlic on 18/03/2025.
-//
-
 import SwiftUI
 
 @main
-struct PionexApp: App {
+struct PionexApp2: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

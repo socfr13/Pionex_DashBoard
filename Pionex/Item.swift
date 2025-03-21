@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 
+@available(macOS 14, *)
 @Model
 final class Item {
     var timestamp: Date

@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+        "type": "lldb",
+        "request": "launch",
+        "name": "Debug CryptoShow",
+        "program": "${workspaceFolder}/.build/debug/CryptoShow",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "preLaunchTask": "Build and Run"
+    },
+    {
+        "type": "lldb",
+        "request": "launch",
+        "args": [],
+        "cwd": "${workspaceFolder:Pionex_DashBoard}",
+        "name": "Debug Pionex_DashBoard",
+        "program": "${workspaceFolder:Pionex_DashBoard}/.build/debug/Pionex_DashBoard",
+        "preLaunchTask": "swift: Build Debug Pionex_DashBoard"
+    },
+    {
+        "type": "lldb",
+        "request": "launch",
+        "args": [],
+        "cwd": "${workspaceFolder:Pionex_DashBoard}",
+        "name": "Release Pionex_DashBoard",
+        "program": "${workspaceFolder:Pionex_DashBoard}/.build/release/Pionex_DashBoard",
+        "preLaunchTask": "swift: Build Release Pionex_DashBoard"
+    }
+]
+}

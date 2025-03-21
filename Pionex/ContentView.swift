@@ -6,47 +6,41 @@
 //
 
 import SwiftUI
+import Foundation
+import Combine
+
+
+
+
 
 struct ContentView: View {
-    @StateObject var viewModel = BitcoinPriceViewModel()
+    @StateObject var viewModel = CryptoPriceViewModel()
 
     var body: some View {
         NavigationView {
             VStack {
-                Text("Cours du Bitcoin (BTC)")
-                    .font(.title)
-                    .padding()
-
-                if let price = viewModel.price {
-                    Text("\(price, specifier: "%.2f") €")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .padding()
+                if viewModel.isLoading {
+                    ProgressView("Chargement des données...")
                 } else if let errorMessage = viewModel.errorMessage {
                     Text("Erreur: \(errorMessage)")
                         .foregroundColor(.red)
-                        .padding()
                 } else {
-                    Text("Chargement du prix...")
-                        .padding()
-                }
-            }
-            .onAppear {
-                viewModel.fetchBTCPrice()
-            }
-            .navigationTitle("Crypto Show")
-
-            // --------------------------------------------------
-            // IMPLEMENTATION CORRECTE DE LA TOOLBAR POUR macOS: Utilisation de .toolbar et placement .automatic
-            // AUCUNE UTILISATION DE .navigationBarTrailing ICI
-            .toolbar { // Utiliser le modificateur .toolbar pour la barre d'outils macOS
-                ToolbarItem(placement: .automatic) { // Placement AUTOMATIQUE dans la toolbar macOS
-                    Button("Actualiser") {
-                        viewModel.fetchBTCPrice()
+                    List(viewModel.cryptos, id: \.id) { crypto in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(crypto.name) // Assurez-vous que `name` est de type String
+                                    .font(.headline)
+                                Text(crypto.symbol.uppercased()) // Assurez-vous que `symbol` est de type String
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
+                            Text("\(crypto.current_price, specifier: "%.2f") €")
+                                .font(.headline)
+                        }
                     }
                 }
             }
-            // --------------------------------------------------
         }
     }
 }
