@@ -26,11 +26,35 @@
     "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/ContentView~partial.swiftmodule",
     "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/ContentView.swiftdeps"
   },
+  "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/Crypto.swift": {
+    "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/Crypto.d",
+    "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/Crypto.swift.o",
+    "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/Crypto~partial.swiftmodule",
+    "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/Crypto.swiftdeps"
+  },
+  "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/CryptoDetailView.swift": {
+    "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoDetailView.d",
+    "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoDetailView.swift.o",
+    "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoDetailView~partial.swiftmodule",
+    "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoDetailView.swiftdeps"
+  },
   "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/CryptoListService.swift": {
     "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoListService.d",
     "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoListService.swift.o",
     "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoListService~partial.swiftmodule",
     "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoListService.swiftdeps"
+  },
+  "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/CryptoPriceViewModel.swift": {
+    "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoPriceViewModel.d",
+    "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoPriceViewModel.swift.o",
+    "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoPriceViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoPriceViewModel.swiftdeps"
+  },
+  "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/CryptoRow.swift": {
+    "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoRow.d",
+    "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoRow.swift.o",
+    "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoRow~partial.swiftmodule",
+    "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoRow.swiftdeps"
   },
   "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/CryptoSelectionManager.swift": {
     "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoSelectionManager.d",
@@ -56,6 +80,12 @@
     "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoViewModel~partial.swiftmodule",
     "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CryptoViewModel.swiftdeps"
   },
+  "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/CursorModifier.swift": {
+    "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CursorModifier.d",
+    "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CursorModifier.swift.o",
+    "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CursorModifier~partial.swiftmodule",
+    "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/CursorModifier.swiftdeps"
+  },
   "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/Item.swift": {
     "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/Item.d",
     "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/Item.swift.o",
@@ -74,6 +104,12 @@
     "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/PionexApp~partial.swiftmodule",
     "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/PionexApp.swiftdeps"
   },
+  "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/SearchBar.swift": {
+    "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/SearchBar.d",
+    "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/SearchBar.swift.o",
+    "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/SearchBar~partial.swiftmodule",
+    "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/SearchBar.swiftdeps"
+  },
   "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/SettingsView.swift": {
     "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/SettingsView.d",
     "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/SettingsView.swift.o",
@@ -85,12 +121,6 @@
     "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/TradingViewChart.swift.o",
     "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/TradingViewChart~partial.swiftmodule",
     "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/TradingViewChart.swiftdeps"
-  },
-  "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/Pionex/main.swift": {
-    "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/main.d",
-    "object": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/main.swift.o",
-    "swiftmodule": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/main~partial.swiftmodule",
-    "swift-dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/main.swiftdeps"
   },
   "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/DerivedSources/resource_bundle_accessor.swift": {
     "dependencies": "/Users/sylvainotparlic/Documents/Xcode/Pionex_DashBoard/.build/arm64-apple-macosx/debug/Pionex_DashBoard.build/resource_bundle_accessor.d",

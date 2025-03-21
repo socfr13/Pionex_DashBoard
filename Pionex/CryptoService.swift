@@ -1,5 +1,5 @@
 import Foundation
-import Combine  // ✅ Ajout du framework Combine pour ObservableObject et @Published
+import Combine
 
 struct CoinGeckoResponse: Codable {
     let market_data: MarketData?
@@ -39,7 +39,6 @@ class CryptoService: ObservableObject {
 
             do {
                 let response = try JSONDecoder().decode(CoinGeckoResponse.self, from: data)
-                
                 DispatchQueue.main.async {
                     if let marketData = response.market_data {
                         self.cryptoData[symbol] = marketData
@@ -58,7 +57,27 @@ class CryptoService: ObservableObject {
     private func sortCryptoList() {
         sortedCryptoList = cryptoData
             .filter { $0.key.uppercased().hasSuffix("USDT") }  // Filtrer les paires USDT
-            .map { (symbol: $0.key, data: $0.value) }  // Transformer en tuples avec les bons noms
+            .map { (symbol: $0.key, data: $0.value) }          // Transformer en tuples avec les bons noms
             .sorted { $0.symbol.localizedCaseInsensitiveCompare($1.symbol) == .orderedAscending }  // Tri alphabétique
+    }
+
+    func fetchCryptos(page: Int) -> AnyPublisher<[Crypto], Error> {
+        let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=10&page=\(page)&sparkline=false")!
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map(\.data)
+            .decode(type: [Crypto].self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchAllCryptos() -> AnyPublisher<[Crypto], Error> {
+        let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=1&sparkline=false")!
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map(\.data)
+            .decode(type: [Crypto].self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
 }

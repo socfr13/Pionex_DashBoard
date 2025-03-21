@@ -8,15 +8,6 @@
 import Foundation
 import Combine
 
-struct Crypto: Decodable {
-    let id: String
-    let symbol: String
-    let name: String
-    let current_price: Double
-    let market_cap: Double
-    let price_change_percentage_24h: Double
-}
-
 typealias CryptoList = [Crypto]
 
 struct BTCPrice: Decodable {
@@ -71,37 +62,6 @@ class BitcoinPriceViewModel: ObservableObject {
             }, receiveValue: { btcPrice in
                 self.price = btcPrice.bitcoin.eur
                 self.errorMessage = nil // Effacer les erreurs précédentes en cas de succès
-            })
-            .store(in: &cancellables)
-    }
-}
-
-class CryptoPriceViewModel: ObservableObject {
-    @Published var cryptos: [Crypto] = []
-    @Published var errorMessage: String?
-    @Published var isLoading: Bool = false
-    private var cancellables: Set<AnyCancellable> = []
-
-    func fetchCryptoPrices() {
-        isLoading = true
-        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=10&page=1&sparkline=false") else {
-            errorMessage = "URL invalide"
-            isLoading = false
-            return
-        }
-
-        URLSession.shared.dataTaskPublisher(for: url)
-            .map(\.data)
-            .decode(type: CryptoList.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                self.isLoading = false
-                if case .failure(let error) = completion {
-                    self.errorMessage = "Erreur: \(error.localizedDescription)"
-                }
-            }, receiveValue: { cryptos in
-                self.cryptos = cryptos
-                self.errorMessage = nil
             })
             .store(in: &cancellables)
     }

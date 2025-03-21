@@ -9,38 +9,70 @@ import SwiftUI
 import Foundation
 import Combine
 
-
-
-
-
 struct ContentView: View {
     @StateObject var viewModel = CryptoPriceViewModel()
+    @State var searchText: String = ""
+    @FocusState private var isSearchFieldFocused: Bool
+
+    var sortedCryptos: [Crypto] {
+        let favoriteIds = viewModel.favorites.map { $0.id }
+        let favorites = viewModel.cryptos.filter { favoriteIds.contains($0.id) }
+        let nonFavorites = viewModel.cryptos.filter { !favoriteIds.contains($0.id) }
+        return favorites + nonFavorites
+    }
 
     var body: some View {
         NavigationView {
             VStack {
+                SearchBar(text: $searchText)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
+                    .focused($isSearchFieldFocused)
+                    .onAppear {
+                        isSearchFieldFocused = true
+                    }
+                
                 if viewModel.isLoading {
                     ProgressView("Chargement des données...")
+                        .padding()
                 } else if let errorMessage = viewModel.errorMessage {
-                    Text("Erreur: \(errorMessage)")
+                    Text(errorMessage)
                         .foregroundColor(.red)
+                        .padding()
                 } else {
-                    List(viewModel.cryptos, id: \.id) { crypto in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(crypto.name) // Assurez-vous que `name` est de type String
-                                    .font(.headline)
-                                Text(crypto.symbol.uppercased()) // Assurez-vous que `symbol` est de type String
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
+                    List(sortedCryptos) { crypto in
+                        CryptoRow(
+                            crypto: crypto,
+                            isFavorite: viewModel.favorites.contains(where: { $0.id == crypto.id }),
+                            toggleFavorite: {
+                                viewModel.toggleFavorite(crypto: crypto)
                             }
-                            Spacer()
-                            Text("\(crypto.current_price, specifier: "%.2f") €")
-                                .font(.headline)
-                        }
+                        )
                     }
                 }
             }
+            .navigationTitle("Crypto Dashboard")
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button(action: {
+                        viewModel.loadCryptoPrices()
+                    }) {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                }
+                ToolbarItem(placement: .automatic) {
+                    Menu {
+                        Button("Nom") { viewModel.sortOption = .name; viewModel.sortCryptos() }
+                        Button("Prix") { viewModel.sortOption = .price; viewModel.sortCryptos() }
+                        Button("Capitalisation") { viewModel.sortOption = .marketCap; viewModel.sortCryptos() }
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                }
+            }
+        }
+        .onAppear {
+            viewModel.loadCryptoPrices()
         }
     }
 }
