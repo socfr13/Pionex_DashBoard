@@ -27,8 +27,8 @@ class BitcoinPriceViewModel: ObservableObject {
                 switch completion {
                 case .failure(let error):
                     self.errorMessage = "Erreur de récupération du prix: \(error.localizedDescription)"
-                    if let decodingError = error as? DecodingError { // Conversion de type conditionnelle (as?)
-                        switch decodingError { // Switch pour gérer les différents cas de DecodingError (optionnel)
+                    if let decodingError = error as? DecodingError { // Vérification si l'erreur est de type DecodingError
+                        switch decodingError { // Gestion des différents types d'erreurs de décodage JSON
                         case .dataCorrupted(let context):
                             self.errorMessage = "Erreur de données corrompues: \(context.debugDescription)"
                         case .keyNotFound(let key, let context):
@@ -47,9 +47,6 @@ class BitcoinPriceViewModel: ObservableObject {
                     break
                 }
             }, receiveValue: { btcPrice in
-                self.price = btcPrice.btc.eur
-                self.errorMessage = nil // Effacer les erreurs précédentes en cas de succès
-            }), receiveValue: { btcPrice in
                 self.price = btcPrice.btc.eur
                 self.errorMessage = nil // Effacer les erreurs précédentes en cas de succès
             })

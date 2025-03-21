@@ -4,11 +4,6 @@
 //
 //  Created by Sylvain on 20/03/2025.
 //
-/* Mise à jour de GitHub
-git add .
-git commit -m "Correction des erreurs Xcode : problème Preview Content et gestion DecodingError"
-git push origin main
-*/
 
 import SwiftUI
 
@@ -16,32 +11,42 @@ struct ContentView: View {
     @StateObject var viewModel = BitcoinPriceViewModel()
 
     var body: some View {
-        VStack {
-            Text("Cours du Bitcoin (BTC)")
-                .font(.title)
-                .padding()
+        NavigationView {
+            VStack {
+                Text("Cours du Bitcoin (BTC)")
+                    .font(.title)
+                    .padding()
 
-            if let price = viewModel.price {
-                Text("\(price, specifier: "%.2f") €")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
-            } else if let errorMessage = viewModel.errorMessage {
-                Text("Erreur: \(errorMessage)")
-                    .foregroundColor(.red)
-                    .padding()
-            } else {
-                Text("Chargement du prix...")
-                    .padding()
+                if let price = viewModel.price {
+                    Text("\(price, specifier: "%.2f") €")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding()
+                } else if let errorMessage = viewModel.errorMessage {
+                    Text("Erreur: \(errorMessage)")
+                        .foregroundColor(.red)
+                        .padding()
+                } else {
+                    Text("Chargement du prix...")
+                        .padding()
+                }
             }
-
-            Button("Actualiser le prix") {
+            .onAppear {
                 viewModel.fetchBTCPrice()
             }
-            .padding()
-        }
-        .onAppear {
-            viewModel.fetchBTCPrice()
+            .navigationTitle("Crypto Show")
+
+            // --------------------------------------------------
+            // IMPLEMENTATION CORRECTE DE LA TOOLBAR POUR macOS: Utilisation de .toolbar et placement .automatic
+            // AUCUNE UTILISATION DE .navigationBarTrailing ICI
+            .toolbar { // Utiliser le modificateur .toolbar pour la barre d'outils macOS
+                ToolbarItem(placement: .automatic) { // Placement AUTOMATIQUE dans la toolbar macOS
+                    Button("Actualiser") {
+                        viewModel.fetchBTCPrice()
+                    }
+                }
+            }
+            // --------------------------------------------------
         }
     }
 }

@@ -7,11 +7,13 @@
 
 import Foundation
 
-// Modèle pour représenter le prix du BTC et les informations de devise
-struct BTCPrice: Decodable {
-    let btc: CurrencyPrice
-}
-
-struct CurrencyPrice: Decodable {
-    let eur: Double
+// Modèle pour représenter les informations d'une cryptomonnaie
+struct CryptoCurrency: Decodable, Identifiable {
+    let id: String
+    let symbol: String
+    let name: String
+    let current_price: Double?
+    let price_change_percentage_24h: Double?
+    let market_cap: Double?
+    let total_volume: Double?
 }
